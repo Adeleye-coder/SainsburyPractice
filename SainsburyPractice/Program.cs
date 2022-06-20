@@ -1,10 +1,12 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SainsburyPractice.Domain.Handler;
+using SainsburyPractice.Domain.MediatRServices;
 using SainsburyPractice.Domain.Services;
 using SainsburyPractice.Interfaces;
 using SainsburyPractice.Repository.DataModel;
 using SainsburyPractice.Repository.Repositories;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +15,10 @@ string mySqlConnectionStr = builder.Configuration.GetConnectionString("DefaultCo
 
 
 //register the mediator
-builder.Services.AddMediatR(typeof(Program));
+//builder.Services.AddMediatR(typeof(Program));
+//builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddMediatR(typeof(EmployeeListCommand).GetTypeInfo().Assembly);
+builder.Services.AddMediatR(typeof(AddEmployeeCommand).GetTypeInfo().Assembly);
 builder.Services.AddHealthChecks().AddMySql(mySqlConnectionStr);
 
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();

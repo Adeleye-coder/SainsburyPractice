@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SainsburyPractice.Domain.MediatRServices;
+using SainsburyPractice.Domain.ViewModel;
 
 namespace SainsburyPractice.Controllers
 {
@@ -20,19 +21,20 @@ namespace SainsburyPractice.Controllers
         [HttpGet("list")]
         public async Task<IActionResult> Employee()
         {
-            var list = await this.mediatR.Send(new AddEmployeeCommand());
+            var list = await this.mediatR.Send(new EmployeeListCommand());
 
             return list == null || list.Count == 0 ? BadRequest() : Ok(list);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Employee(EmployeeViewModel model)
-        //{
-        //    Guard.Against.Null(model, nameof(model));
-        //    var message = await this.employeeServices.AddEmployee(model);
+        [HttpPost("add")]
+        public async Task<IActionResult> Employee(EmployeeViewModel model)
+        {
+            Guard.Against.Null(model, nameof(model));
 
-        //    return message == null ? Ok() : BadRequest(message);
-        //}
+            var message = await this.mediatR.Send(new AddEmployeeCommand(model));
+
+            return message == null ? Ok("Employee added successfully") : BadRequest(message);
+        }
 
         //[HttpGet]
         //public async Task<IActionResult> SingleEmployee(int employeeId)

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SainsburyPractice.Domain.MediatRServices
 {
-    public record AddEmployeeCommand(IEmployee employee) : IRequest<string>
+    public record EmployeeListCommand : IRequest<IList<IEmployee>>
     {
     }
 }

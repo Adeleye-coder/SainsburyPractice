@@ -9,15 +9,19 @@ using System.Threading.Tasks;
 
 namespace SainsburyPractice.Domain.Handler
 {
-    public class GetEmployeeListHandler : IRequestHandler<EmployeeListCommand, IList<IEmployee>>
+    public class AddEmployeeHandler : IRequestHandler<AddEmployeeCommand, string?>
     {
         private readonly IEmployeeRepository employeeRepository;
-        public GetEmployeeListHandler(IEmployeeRepository employeeRepository)
+        public AddEmployeeHandler(IEmployeeRepository employeeRepository)
         {
             this.employeeRepository = employeeRepository;
         }
 
-        public async Task<IList<IEmployee>> Handle(EmployeeListCommand request,
-        CancellationToken cancellationToken) => await this.employeeRepository.FetchEmployeeList();
+        public async Task<string?> Handle(AddEmployeeCommand request,
+      CancellationToken cancellationToken) 
+        {
+           return await this.employeeRepository.SaveEmployee(request.employee); 
+        } 
+
     }
 }
