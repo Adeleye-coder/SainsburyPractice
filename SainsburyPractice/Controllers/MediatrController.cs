@@ -36,14 +36,14 @@ namespace SainsburyPractice.Controllers
             return message == null ? Ok("Employee added successfully") : BadRequest(message);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> SingleEmployee(int employeeId)
-        //{
-        //    Guard.Against.Null(employeeId, nameof(employeeId));
-        //    var single = await this.employeeServices.GetEmployeeById(employeeId);
+        [HttpGet("details")]
+        public async Task<IActionResult> Employee(int employeeId)
+        {
+            Guard.Against.Null(employeeId, nameof(employeeId));
 
-        //    return single == null ? BadRequest() : Ok(single);
-        //}
+            var details = await this.mediatR.Send(new GetEmployeeByIdCommand(employeeId));
+            return details == null ? BadRequest() : Ok(details);
+        }
 
     }
 }

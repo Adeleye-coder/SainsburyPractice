@@ -18,6 +18,7 @@ string mySqlConnectionStr = builder.Configuration.GetConnectionString("DefaultCo
 //builder.Services.AddMediatR(typeof(Program));
 //builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddMediatR(typeof(EmployeeListCommand).GetTypeInfo().Assembly);
+builder.Services.AddMediatR(typeof(GetEmployeeByIdCommand).GetTypeInfo().Assembly); 
 builder.Services.AddMediatR(typeof(AddEmployeeCommand).GetTypeInfo().Assembly);
 builder.Services.AddHealthChecks().AddMySql(mySqlConnectionStr);
 
