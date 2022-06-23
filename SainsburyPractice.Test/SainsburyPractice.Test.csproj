@@ -36,10 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ServiceTest\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SainsburyPractice\SainsburyPractice.csproj" />
   </ItemGroup>
 

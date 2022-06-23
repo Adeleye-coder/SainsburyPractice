@@ -35,7 +35,7 @@ namespace SainsburyPractice.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> SingleEmployee(int employeeId)
+        public async Task<IActionResult> Employee(int employeeId)
         {
             Guard.Against.Null(employeeId, nameof(employeeId));
             var single = await this.employeeServices.GetEmployeeById(employeeId);
